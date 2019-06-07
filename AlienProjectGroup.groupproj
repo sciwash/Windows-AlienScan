@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{9C8485E8-2913-46E9-9B6A-9F5B80631A4B}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="AlienScan.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="AlienRFID.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="AlienScan">
+        <MSBuild Projects="AlienScan.dproj"/>
+    </Target>
+    <Target Name="AlienScan:Clean">
+        <MSBuild Projects="AlienScan.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AlienScan:Make">
+        <MSBuild Projects="AlienScan.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="AlienRFID">
+        <MSBuild Projects="AlienRFID.dproj"/>
+    </Target>
+    <Target Name="AlienRFID:Clean">
+        <MSBuild Projects="AlienRFID.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AlienRFID:Make">
+        <MSBuild Projects="AlienRFID.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="AlienScan;AlienRFID"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="AlienScan:Clean;AlienRFID:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="AlienScan:Make;AlienRFID:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
